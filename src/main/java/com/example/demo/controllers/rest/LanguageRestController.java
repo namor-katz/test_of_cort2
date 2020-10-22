@@ -21,7 +21,7 @@ public class LanguageRestController {
 
     private final LanguageService languageService;
 
-    @GetMapping(value = {"language", "/language/{name}"})
+    @GetMapping(value = {"/language", "/language/{name}"})
     public List<Language> getLanguage(@PathVariable(required = false) String name) {
         if (name ==  null) {
             return languageService.getAllLanguage();
@@ -39,7 +39,6 @@ public class LanguageRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-//    @ApiResponses(value = {@ApiResponse(code = 201, message = "ok")})
     @DeleteMapping("/language/{name}")
     public Map<String, String> deleteLanguage(@PathVariable(name = "name") String name) {
         HashMap<String, String> map = new HashMap<>();
@@ -53,5 +52,10 @@ public class LanguageRestController {
             map.put("state", "ok");
         }
         return map;
+    }
+
+    @PutMapping(value = "/language", consumes = {"application/json"})
+    public void updateLanguage(@RequestBody Language l) {
+        languageService.updateLanguage(l);
     }
 }

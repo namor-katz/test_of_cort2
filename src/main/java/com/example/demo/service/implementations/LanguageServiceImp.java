@@ -4,7 +4,6 @@ import com.example.demo.models.Language;
 import com.example.demo.repository.LanguageRepository;
 import com.example.demo.service.interfaces.LanguageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +32,8 @@ public class LanguageServiceImp implements LanguageService {
     @Override
     public void updateLanguage(Language language) {
         Language languageUpdate = findLanguageByName(language.getName());
+        languageUpdate.setRaiting(language.getRaiting());
+        languageUpdate.setDescription(language.getDescription());
         languageRepository.save(languageUpdate);
     }
 
