@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-Use curl http://localhost:8080/language
+<p>
+    Use curl http://localhost:8080/language from get list languages
+</p>
+<p>
+    Use curl -X POST -v -d '{"name":"rust", "description":"safe lang", "raiting":"9"}' -H "Content-Type: application/json" http://localhost:8080/language  from create new languages
+</p>
+<p>
+    use curl -X DELETE http://localhost:8080/language/java from delete lang by name
+</p>
 </body>
 </html>

@@ -33,27 +33,23 @@ public class LanguageRestController {
         }
     }
 
-    @PostMapping
-    public void Empt() {
-        System.out.println("получен запрос post!");
+    @PostMapping(value = "/language", consumes = {"application/json"})
+    public ResponseEntity<Language> createNewLanguage(@RequestBody Language l) {
+        languageService.addLanguage(l);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "ok")})
+//    @ApiResponses(value = {@ApiResponse(code = 201, message = "ok")})
     @DeleteMapping("/language/{name}")
     public Map<String, String> deleteLanguage(@PathVariable(name = "name") String name) {
         HashMap<String, String> map = new HashMap<>();
         if(name == null) {
-            System.out.println("сорян, чо удалять то?");
-//            HashMap<String, String> map = new HashMap<>();
-            map.put("", "");
+            map.put("state", "not found");
         }
         else {
             Language l = languageService.findLanguageByName(name);
             Long id = l.getId();
             languageService.deleteLanguage(id);
-//            return new ResponseEntity(HttpStatus.OK);
-//            System.out.println("удалено успешно!");
-//            HashMap<String, String> map = new HashMap<>();
             map.put("state", "ok");
         }
         return map;
